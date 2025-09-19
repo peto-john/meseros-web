@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Reserva de Meseros - App Híbrida</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Barra superior con nombre y menú -->
+  <header>
+    <h1>Reserva de Meseros</h1>
+    <nav>
+      <button onclick="mostrarSeccion('inicio')">Inicio</button>
+      <button onclick="mostrarSeccion('catalogo')">Catálogo</button>
+      <button onclick="mostrarSeccion('servicios')">Servicios</button>
+      <button onclick="mostrarSeccion('contacto')">Contacto</button>
+      <button onclick="mostrarSeccion('login')">Admin</button>
+    </nav>
+  </header>
+
+  <!-- Aside: menú lateral (podrías agregar filtros de productos o enlaces extras) -->
+  <aside>
+    <h2>Menú </h2>
+    <ul>
+      <li><a href="#" onclick="mostrarSeccion('catalogo')">Ver Reservas</a></li>
+      <li><a href="#" onclick="mostrarSeccion('servicios')">Servicios</a></li>
+      <li><a href="#" onclick="mostrarSeccion('contacto')">Contacto</a></li>
+    </ul>
+  </aside>
+
+  <!-- Contenido principal con diferentes secciones -->
+  <main>
+    <!-- Sección Inicio -->
+    <section id="inicio" class="seccion activa">
+      <h2>Bienvenidos a Meseros SJ</h2>
+      <p>Explora nuestros servicios de Atencion al Cliente con amor ❤️.</p>
+    </section>
+
+    <!-- Sección Catálogo -->
+    <section id="catalogo" class="seccion">
+      <h2>Catálogo de Servicios</h2>
+      <div id="lista-productos"></div>
+    </section>
+
+    <!-- Sección Servicios -->
+    <section id="servicios" class="seccion">
+      <h2>Servicios</h2>
+      <p>Ofrecemos servicios  personalizado y profecionales para cada uno de los Asistentes del Evento  .</p>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="seccion">
+      <h2>Contacto</h2>
+      <p>Escríbenos por WhatsApp: 
+        <a href="https://wa.me/573145007411" target="_blank">Click aquí</a>
+      </p>
+    </section>
+
+    <!-- Sección Login -->
+    <section id="login" class="seccion">
+      <h2>Acceso Administrador</h2>
+      <form id="form-login">
+        <label>Usuario:</label>
+        <input type="text" id="usuario" required>
+        <label>Contraseña:</label>
+        <input type="password" id="password" required>
+        <button type="submit">Ingresar</button>
+      </form>
+      <p id="msg-login"></p>
+    </section>
+
+    <!-- Panel interno solo para el admin -->
+    <section id="admin-panel" class="seccion">
+      <h2>Panel de Administración</h2>
+      <p>Bienvenido administrador. Aquí podrás gestionar las Reservas y Servicios .</p>
+      <button onclick="cerrarSesion()">Cerrar sesión</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Tienda de Moda - Todos los derechos reservados</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
