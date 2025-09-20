@@ -21,7 +21,9 @@ productos.forEach(prod => {
     <h3>${prod.nombre}</h3>
     <p>${prod.precio.toLocaleString()}</p>
     <a href="https://wa.me/573145007411?text=Hola,%20me%20interesa%20${encodeURIComponent(prod.nombre)}" target="_blank">
-      <button>Pedir por WhatsApp</button>
+      
+      <button>Solicitar por WhatsApp</button>
+
     </a>
   `;
   lista.appendChild(card);
