@@ -2,10 +2,10 @@
 // Datos de productos para el catálogo
 // ===================================
 const productos = [
-  { nombre: "1 mesero", precio: "Cada 20 Pers-Max", imagen: "imagenes/mesero1.jpg" },
-  { nombre: "2 meseros", precio: "Cada 40 Pers-Max", imagen: "imagenes/mesero2.jpg" },
-  { nombre: "3 meseros", precio: "Cada 60 Pers-Max", imagen: "imagenes/mesero3.jpg" },
-  { nombre: "4 meseros", precio: "Cada 100 Pers-Max", imagen: "imagenes/mesero4.jpg" }
+  { nombre: "1 mesero", precio: "Para 20 pers-max", imagen: "imagenes/mesero1.jpg" },
+  { nombre: "2 meseros", precio: "Para 40 pers-max", imagen: "imagenes/mesero2.jpg" },
+  { nombre: "3 meseros", precio: "Para 60 pers-max", imagen: "imagenes/mesero3.jpg" },
+  { nombre: "4 meseros", precio: "Para 100 pers-max", imagen: "imagenes/mesero4.jpg" }
 ];
 
 // ================================
@@ -21,7 +21,7 @@ productos.forEach(prod => {
     <h3>${prod.nombre}</h3>
     <p>${prod.precio.toLocaleString()}</p>
     <a href="https://wa.me/573145007411?text=Hola,%20me%20interesa%20${encodeURIComponent(prod.nombre)}" target="_blank">
-      <button>Pedir Mas Informacion Por WhatsApp</button>
+      <button>Pedir por WhatsApp</button>
     </a>
   `;
   lista.appendChild(card);
@@ -31,13 +31,12 @@ productos.forEach(prod => {
 // Sistema de navegación (cambia secciones)
 // ================================
 function mostrarSeccion(id) {
-  // Ocultar todas las secciones
-  document.querySelectorAll(".seccion").forEach(sec => {
-    sec.classList.remove("activa");
-  });
-  // Mostrar la seleccionada
+  document.querySelectorAll(".seccion").forEach(sec => sec.classList.remove("activa"));
   document.getElementById(id).classList.add("activa");
+  // Cerrar menú en móvil al hacer clic
+  navMenu.classList.remove("activo");
 }
+
 
 // ================================
 // Sistema de login básico
@@ -66,3 +65,15 @@ function cerrarSesion() {
   mostrarSeccion("inicio");
   msgLogin.textContent = "Sesión cerrada";
 }
+
+
+// ===================================
+// Menu de Hamburguesa ( Responsivo )
+// ===================================
+
+const menuToggle = document.getElementById("menu-toggle");
+const navMenu = document.getElementById("menu-principal");
+
+menuToggle.addEventListener("click", () =>{
+  navMenu.classList.toggle("activo");
+})

@@ -3,14 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Reserva de Meseros - App Híbrida</title>
+  <title>Web Reserva de Meseros </title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Barra superior con nombre y menú -->
   <header>
     <h1>Reserva de Meseros</h1>
-    <nav>
+
+    <button id="menu-toggle" class="hamburguesa ">
+
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 100 80" fill="#333">
+        <rect width="100" height="15"></rect>
+        <rect y="30" width="100" height="15"></rect>
+        <rect y="60" width="100" height="15"></rect>
+      </svg>
+      
+    </button>
+
+    <!-- Menu Principal -->
+    <nav id="menu-principal">
       <button onclick="mostrarSeccion('inicio')">Inicio</button>
       <button onclick="mostrarSeccion('catalogo')">Catálogo</button>
       <button onclick="mostrarSeccion('servicios')">Servicios</button>
@@ -79,7 +91,7 @@
   </main>
 
   <footer>
-    <p>© 2025 Tienda de Moda - Todos los derechos reservados</p>
+    <p>© 2025 Meseros SJ - Todos los derechos reservados</p>
   </footer>
 
   <script src="script.js"></script>
