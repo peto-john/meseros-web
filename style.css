@@ -113,6 +113,135 @@ footer {
   color: white;
   cursor: pointer;
 }
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "aside main"
+    "footer footer";
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+/* Header superior */
+header {
+  grid-area: header;
+  background: #e91e63;
+  color: rgb(15, 15, 15);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav button {
+  background: #ac1278;
+  border: none;
+  padding: 0.5rem 2rem 0.5rem;
+  margin-left: 0.3rem;
+  border-radius: 7px;
+  color: rgb(212, 213, 223);
+  cursor: pointer;
+}
+
+/* OCULTA PARA (PC) Imagen del Logo de La Empresa AQUI QUEDO */
+.imagen-logo-empresa {
+  display: none;
+  
+}
+
+nav h2 {
+  display: flex;
+  font-size: 1.2rem;
+  color: aliceblue;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+/* Menú lateral */
+aside {
+  grid-area: aside;
+  background: #4e4c5fa4;
+  padding: 1rem;
+  justify-items: center;
+}
+
+
+aside h2 {
+  margin-top: 0;
+}
+
+/* Main (contenido principal) */
+main {
+  grid-area: main;
+  padding: 1rem;
+}
+
+.seccion {
+  display: none; /* Por defecto ocultas */
+}
+
+.seccion.activa {
+  display: block; /* Solo se muestra la activa */
+}
+
+/* Footer */
+footer {
+  grid-area: footer;
+  text-align: center;
+  background: #222;
+  color: rgb(126, 113, 113);
+  padding: 1rem;
+}
+
+/* Estilos del catálogo */
+#lista-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: rgb(197, 187, 187);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.30);
+  padding: 1rem;
+  text-align: center;
+}
+
+.card p {
+  color: rgb(5, 58, 12);
+}
+
+.card img {
+  width: 100px;
+  border-radius: 8px;
+  height: 110px;
+}
+
+.card button {
+  background: #e91e63;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+/* ========== Menu hamburguesa (  ES Oculto en PC ) ===========*/
+.hamburguesa {
+  display: none;
+  background: none;
+  font-size: 2rem;
+  border: none;
+  color: rgb(238, 231, 231);
+  cursor: pointer;
+}
 
 /* ====== Responsividad móvil ====== */
 @media screen and (max-width: 768px) {
@@ -128,29 +257,49 @@ footer {
     display: none; /* Ocultamos menú lateral en móviles */
   }
 
+  
+  /* EN TRABAJO LINEAS NUEVAS */
+  .imagen-logo-empresa { 
+    display: grid;
+    padding-left: 25%;
+  }
+
+  .imagen-logo-empresa h2 {
+    display: grid;
+    margin: 5% 0 20% ;
+    padding-right: 25%;
+    font-size: 0.6rem;
+  }
+
+  .imagen-logo-empresa img {
+    width: 70%;
+    border-radius: 50%;
+  }
+
+
   /* Menú oculto inicialmente */
   nav {
     display: flex;
     flex-direction: column;
-    background: #222;
+    background: #292626;
     position: fixed;
     top: 0;
     left: -100%; /* escondido fuera de la pantalla */
-    width: 70%;
+    width: 40%;
     height: 100%;
-    padding-top: 60px;
-    transition: left 0.3s ease;
+    padding-top: 3px;
+    transition: left 0.5s ease;
     z-index: 1000;
   }
 
   nav button {
-    background: none;
+    background: white;
     border: none;
-    color: white;
+    color: rgb(238, 229, 229);
     padding: 1rem;
     text-align: left;
     width: 100%;
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     border-bottom: 1px solid #333;
     cursor: pointer;
   }
