@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Barra superior con nombre y menú -->
+  <!-- ====== Barra superior con nombre y menú ====== -->
   <header>
     <h1>MESEROS SJ</h1>
 
@@ -15,10 +15,10 @@
       <img src="https://www.svgrepo.com/show/312300/hamburger-menu.svg" alt="Icono de menú hamburguesa" width="50" height="50">
     </button>
 
-    <!-- Menu Principal -->
+    <!-- ====== Menu Principal ====== -->
     <nav id="menu-principal">
 
-      <!-- Imagen del Logo de La Empresa -->
+      <!-- ====== Imagen del Logo de La Empresa ====== -->
       <div class="imagen-logo-empresa" >
         <img src="imagenes/logo.jpg" alt="imagen-logo-empresa" >
         
@@ -28,17 +28,17 @@
         
       </div>
 
-      
-
       <button onclick="mostrarSeccion('inicio')">Inicio</button>
       <button onclick="mostrarSeccion('catalogo')">Catálogo</button>
+      <button onclick="mostrarSeccion('reservas')">Reservas</button>
       <button onclick="mostrarSeccion('servicios')">Servicios</button>
       <button onclick="mostrarSeccion('contacto')">Contacto</button>
       <button onclick="mostrarSeccion('login')">Admin</button>
+
     </nav>
   </header>
 
-  <!-- Aside: menú lateral (podrías agregar filtros de productos o enlaces extras) -->
+  <!-- ====== Aside: menú lateral (podrías agregar filtros de productos o enlaces extras) ====== -->
   <aside>
     <h2>Menú </h2>
     <ul>
@@ -48,27 +48,61 @@
     </ul>
   </aside>
 
-  <!-- Contenido principal con diferentes secciones -->
+  <!-- ====== Contenido principal con diferentes secciones ====== -->
   <main>
-    <!-- Sección Inicio -->
+
+    <!-- ====== Sección Inicio ====== -->
     <section id="inicio" class="seccion activa">
       <h2>Bienvenidos a Meseros SJ</h2>
       <p>Explora nuestros servicios de Atencion al Cliente con amor ❤️.</p>
     </section>
 
-    <!-- Sección Catálogo -->
+
+    <!-- ====== Sección Catálogo ====== -->
     <section id="catalogo" class="seccion">
       <h2>Catálogo de Servicios</h2>
       <div id="lista-productos"></div>
     </section>
 
-    <!-- Sección Servicios -->
+
+    <!-- ====== Sección de Reservas (Clientes) ====== -->
+    <section id="reservas" class="seccion">
+
+      <h2>📅 Realiza tu Reserva</h2>
+
+      <form id="form-reserva" class="card-form">
+        <label for="cliente-nombre">Tu nombre</label>
+        <input type="text" id="cliente-nombre" placeholder="Escribe tu nombre" required>
+
+        <label for="fecha-evento">Selecciona la fecha</label>
+        <input type="date" id="fecha-evento" required>
+
+        <button type="submit" class="btn">Reservar</button>
+      </form>
+
+      <h3>Eventos Reservados:</h3>
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Meseros asignados</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="lista-reservas"></tbody>
+      </table>
+    </section>
+
+
+    <!-- ====== Sección Servicios ====== -->
     <section id="servicios" class="seccion">
       <h2>Servicios</h2>
       <p>Ofrecemos servicios  personalizado y profecionales para cada uno de los Asistentes del Evento  .</p>
     </section>
 
-    <!-- Sección Contacto -->
+
+    <!-- ====== Sección Contacto ====== -->
     <section id="contacto" class="seccion">
       <h2>Contacto</h2>
       <p>Escríbenos por WhatsApp para mas Informacion: 
@@ -76,30 +110,75 @@
       </p>
     </section>
 
-    <!-- Sección Login -->
+
+    <!-- ====== Sección Login ====== -->
     <section id="login" class="seccion">
       <h2>Acceso Administrador</h2>
-      <form id="form-login">
-        <label>Usuario:</label>
-        <input type="text" id="usuario" required>
-        <label>Contraseña:</label>
-        <input type="password" id="password" required>
-        <button type="submit">Ingresar</button>
+      
+      <div class="login-personalizado">
+
+        <form id="form-login">
+          <label>Usuario</label>
+          <input type="text" id="usuario" placeholder="Usuario" required>
+
+          <label>Contraseña</label>
+          <input type="password" id="password" placeholder="Contraseña" required>
+          <button type="submit">Ingresar</button>
+
+        </form>
+
+      </div>
+      <p id="msg-login" class="p-login"></p>
+
+    </section>
+
+    <!-- ====== Sección de Administración de Meseros ====== -->
+    <section id="admin-panel" class="seccion" >
+      <h2>👨‍🍳 Gestión de Meseros</h2>
+      <form id="form-mesero" class="card-form">
+        <label for="mesero-nombre">Nombre del mesero</label>
+        <input type="text" id="mesero-nombre" placeholder="Ej: Juan Pérez" required>
+        
+        <label for="mesero-tel">Teléfono</label>
+        <input type="text" id="mesero-tel" placeholder="Ej: 3001234567" required>
+
+        <button type="submit" class="btn">Agregar Mesero</button>
       </form>
-      <p id="msg-login"></p>
+
+      <h3>Lista de Meseros:</h3>
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody id="lista-meseros"></tbody>
+      </table>
+
+      <button class="btn-cerrar-sesion" onclick="cerrarSesion()">Cerrar sesión</button>
+      
     </section>
 
-    <!-- Panel interno solo para el admin -->
-    <section id="admin-panel" class="seccion">
-      <h2>Panel de Administración</h2>
-      <p>Bienvenido administrador. Aquí podrás gestionar las Reservas y Servicios .</p>
-      <button onclick="cerrarSesion()">Cerrar sesión</button>
-    </section>
+    <div id="modal-asignar" class="modal">
+      <div class="modal-contenido">
+        <h3>Asignar Mesero</h3>
+        <select id="select-mesero"></select>
+        <div class="modal-botones">
+          <button id="btn-confirmar" class="btn">Confirmar</button>
+          <button id="btn-cancelar" class="btn-cancelar">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
   </main>
-
+  
   <footer>
     <p>© 2025 Meseros SJ - Todos los derechos reservados</p>
   </footer>
+
+  
 
   <script src="script.js"></script>
 </body>
