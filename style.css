@@ -353,7 +353,7 @@ footer {
 
   /* ====== Modal Asignación ====== */
   .modal {
-    display: block; /* oculto por defecto */
+    display: none; /* oculto por defecto */
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
