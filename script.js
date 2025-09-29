@@ -22,9 +22,12 @@ productos.forEach(prod => {
     <p>${prod.precio.toLocaleString()}</p>
     <a href="https://wa.me/573145007411?text=Hola,%20me%20interesa%20${encodeURIComponent(prod.nombre)}" target="_blank">
       
-      <button>Solicitar por WhatsApp</button>
+      <button>WhatsApp</button>
 
     </a>
+
+    <div><button onclick="mostrarSeccion('reservas')" style="background: #e91e62b9;">Reservas</button></div>
+    
   `;
   lista.appendChild(card);
 });
@@ -110,6 +113,9 @@ formReserva.addEventListener("submit", (e) => {
   }
 });
 
+// ===============================================
+// 6. Renderizar reservas (Admin y Cliente)
+// ===============================================
 function renderReservas() {
   listaReservas.innerHTML = "";
 
@@ -125,15 +131,35 @@ function renderReservas() {
       </td>
       <td>
         ${esAdmin 
-          ? `<button class="btn-detalle" data-id="${reserva.id}">detalle</button>` 
+          ? `
+            <button class="btn-asignar" data-id="${reserva.id}">Asignar</button>
+            <button class="btn-eliminar" data-id="${reserva.id}">Eliminar</button>
+          `
           : ""}
-        
+        <button id="detalle" class="btn-detalle" data-id="${reserva.id}">Detalles</button>
       </td>
     `;
     listaReservas.appendChild(fila);
   });
 
-  
+  // Eventos para admin
+  if (esAdmin) {
+    document.querySelectorAll(".btn-asignar").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const id = e.target.getAttribute("data-id");
+        abrirModalAsignar(id);
+      });
+    });
+
+    document.querySelectorAll(".btn-eliminar").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const id = e.target.getAttribute("data-id");
+        eliminarReserva(id);
+      });
+    });
+  }
+
+  // Eventos para clientes
   document.querySelectorAll(".btn-detalle").forEach(btn => {
     btn.addEventListener("click", (e) => {
       const id = e.target.getAttribute("data-id");
@@ -143,7 +169,7 @@ function renderReservas() {
 }
 
 // ===============================================
-// 6. Manejo de Meseros (Admin)
+// 7. Manejo de Meseros (Admin)
 // ===============================================
 let meseros = [];
 const formMesero = document.getElementById("form-mesero");
@@ -176,11 +202,7 @@ function renderMeseros() {
       <td>${m.nombre}</td>
       <td>${m.telefono}</td>
       <td>${m.disponible ? "Disponible ✅" : "Ocupado ❌"}</td>
-      <td>
-        ${m.disponible 
-          ? `<button class="btn-asignar-reserva" data-index="${i}">Asignar a reserva</button>`
-          : ""}
-      </td>
+      
     `;
     listaMeseros.appendChild(fila);
   });
@@ -188,37 +210,36 @@ function renderMeseros() {
   document.querySelectorAll(".btn-asignar-reserva").forEach(btn => {
     btn.addEventListener("click", (e) => {
       const index = e.target.getAttribute("data-index");
-      abrirModalAsignarReserva(index);
+      abrirModalAsignar(index);
     });
   });
 }
 
 // ===============================================
-// 7. Modal para asignar reserva a mesero
+// 8. Modal Asignar Mesero
 // ===============================================
 const modal = document.getElementById("modal-asignar");
-const selectReserva = document.getElementById("select-reserva");
+const selectMesero = document.getElementById("select-mesero");
 const btnConfirmar = document.getElementById("btn-confirmar");
 const btnCancelar = document.getElementById("btn-cancelar");
 
-let meseroSeleccionado = null;
+let reservaSeleccionada = null;
 
-function abrirModalAsignarReserva(indexMesero) {
-  meseroSeleccionado = meseros[indexMesero];
+function abrirModalAsignar(reservaId) {
+  reservaSeleccionada = reservas.find(r => r.id == reservaId);
 
-  // llenar reservas disponibles
-  selectReserva.innerHTML = "";
-  reservas.forEach(r => {
-    if (r.meserosAsignados.length === 0) { // solo reservas sin mesero
+  selectMesero.innerHTML = "";
+  meseros.forEach((m, i) => {
+    if (m.disponible) {
       const option = document.createElement("option");
-      option.value = r.id;
-      option.textContent = `${r.fecha} - Cliente: ${r.cliente}`;
-      selectReserva.appendChild(option);
+      option.value = i;
+      option.textContent = `${m.nombre} - 📞${m.telefono}`;
+      selectMesero.appendChild(option);
     }
   });
 
-  if (selectReserva.options.length === 0) {
-    alert("⚠️ No hay reservas pendientes para asignar.");
+  if (selectMesero.options.length === 0) {
+    alert("⚠️ No hay meseros disponibles.");
     return;
   }
 
@@ -226,17 +247,17 @@ function abrirModalAsignarReserva(indexMesero) {
 }
 
 btnConfirmar.addEventListener("click", () => {
-  const reservaId = selectReserva.value;
-  const reserva = reservas.find(r => r.id == reservaId);
+  const index = selectMesero.value;
+  const mesero = meseros[index];
 
-  reserva.meserosAsignados.push(meseroSeleccionado);
-  meseroSeleccionado.disponible = false;
+  reservaSeleccionada.meserosAsignados.push(mesero);
+  mesero.disponible = false;
 
   renderReservas();
   renderMeseros();
   modal.style.display = "none";
 
-  alert(`✅ Mesero ${meseroSeleccionado.nombre} asignado a la reserva del ${reserva.fecha}.`);
+  alert(`✅ Mesero ${mesero.nombre} asignado a la reserva del ${reservaSeleccionada.fecha}.`);
 });
 
 btnCancelar.addEventListener("click", () => {
@@ -244,17 +265,54 @@ btnCancelar.addEventListener("click", () => {
 });
 
 // ===============================================
-// 8. Ver detalle de reserva (clientes)
+// 9. Eliminar reserva (y liberar meseros asignados)
 // ===============================================
+function eliminarReserva(id) {
+  const confirmar = confirm("⚠️ ¿Seguro que quieres eliminar esta reserva?");
+  if (!confirmar) return;
+
+  const reserva = reservas.find(r => r.id == id);
+  if (reserva && reserva.meserosAsignados.length > 0) {
+    reserva.meserosAsignados.forEach(m => {
+      m.disponible = true; // liberar mesero
+    });
+  }
+
+  reservas = reservas.filter(r => r.id != id);
+  renderReservas();
+  renderMeseros();
+  alert("🗑️ Reserva eliminada y meseros liberados.");
+}
+
+// ===============================================
+// 10. Ver detalle de reserva (clientes)
+// ===============================================
+const modalDetalle = document.getElementById("modal-detalle");
+const detalleContenido = document.getElementById("detalle-contenido");
+const btnCerrarDetalle = document.getElementById("btn-cerrar-detalle");
+
 function verDetalle(reservaId) {
   const reserva = reservas.find(r => r.id == reservaId);
 
+  if (!reserva) return;
+
+  let html = `<p><strong>Fecha:</strong> ${reserva.fecha}</p>
+              <p><strong>Cliente:</strong> ${reserva.cliente}</p>`;
+
   if (reserva.meserosAsignados.length === 0) {
-    alert("📌 Aún no se han asignado meseros a esta reserva.");
+    html += `<p><strong>Meseros:</strong> Pendiente</p>`;
   } else {
-    const detalle = reserva.meserosAsignados
-      .map(m => `👨‍🍳 ${m.nombre} - 📞 ${m.telefono}`)
-      .join("\n");
-    alert(`Meseros asignados para el ${reserva.fecha}:\n\n${detalle}`);
+    html += `<p><strong>Meseros asignados:</strong></p><ul>`;
+    reserva.meserosAsignados.forEach(m => {
+      html += `<li>👨‍🍳 ${m.nombre} - 📞 ${m.telefono}</li>`;
+    });
+    html += `</ul>`;
   }
+
+  detalleContenido.innerHTML = html;
+  modalDetalle.style.display = "flex";
 }
+
+btnCerrarDetalle.addEventListener("click", () => {
+  modalDetalle.style.display = "none";
+});
