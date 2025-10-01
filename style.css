@@ -33,6 +33,37 @@ header nav button {
   cursor: pointer;
 }
 
+
+ /* Imagenes con Slider de Seccion Inicio */
+.slider {
+  background-image: url(imagenes/logo.jpg);
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  height: 50%;
+  width: 30%;
+  top: 500px;
+  left: 40%;
+  transform: translate(-20%, -50%);
+  animation: efecto linear infinite 10s;
+  border-radius: 10px;
+}
+@keyframes efecto {
+  20%{
+    background-image: url(imagenes/mesero1.jpg);
+  }
+  40%{
+    background-image: url(imagenes/mesero2.jpg);
+  }
+  60%{
+    background-image: url(imagenes/mesero3.jpg);
+  }
+  80%{
+    background-image: url(imagenes/mesero4.jpg);
+  }
+  
+}
+
 /* OCULTA PARA (PC) Imagen del Logo de La Empresa AQUI QUEDO */
 .imagen-logo-empresa {
   display: none;
@@ -47,18 +78,6 @@ nav h2 {
   margin-top: 5rem;
 }
 
-/* Menú lateral */
-aside {
-  grid-area: aside;
-  background: #4e4c5fa4;
-  padding: 1rem;
-  justify-items: center;
-}
-
-
-aside h2 {
-  margin-top: 0;
-}
 
 /* Main (contenido principal) */
 main {
@@ -303,51 +322,60 @@ footer {
   gap: 10px;
 }
 
-
-.btn-asignar {
-  width: 70%;
-  background: #383535;
+/* ====== Estilo de Botones Personalizados ( PC ) ====== */
+.btn-eliminar {
+  width: 50px;
+  background: #d32f2f;
   color: #e9f0e9;
+  margin: 3px;
   font-size: 9px;
   border-radius: 5px;
   border: none;
+  }
+.btn-asignar {
+  width: 50px;
+  background: #3e7710d8;
+  color: #e9f0e9;
+  font-size: 9px;
+  border-radius: 4px;
+  border: none;
 }
 .btn-detalle {
-  width: 75%;
+  width: 50px;
   background: #5d5f5bd8;
   color: #e9f0e9;
   font-size: 9px;
   border-radius: 4px;
   border: none;
 }
+
+
 .btn-cancelar {
-  background: #777;
+  background: #5d5f5bd8;
   color: white;
   border: none;
-  padding: 12px;
+  padding: 10px;
+  margin-top: 15px;
   border-radius: 8px;
   cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+  transition: 0.3s;
 }
 .btn-cancelar:hover {
-  background: #9e1111;
+  background: #555;
 }
-
-
 
 
 
 /* ====== Responsividad móvil ====== */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 970px) {
   body {
     grid-template-areas:
       "header"
       "main"
       "footer";
     grid-template-columns: 1fr;
-  }
-
-  aside {
-    display: none; /* Ocultamos menú lateral en móviles */
   }
 
   
@@ -472,10 +500,9 @@ footer {
     line-height: 1.6;
   }
 
-  
-
+  /* ====== Estilo de Botones Personalizados ( MOVIL ) ====== */
   .btn-eliminar {
-    width: 75%;
+    width: 50px;
     background: #d32f2f;
     color: #e9f0e9;
     margin: 3px;
@@ -484,7 +511,7 @@ footer {
     border: none;
   }
   .btn-asignar {
-    width: 75%;
+    width: 50px;
     background: #3e7710d8;
     color: #e9f0e9;
     font-size: 9px;
@@ -492,7 +519,7 @@ footer {
     border: none;
   }
   .btn-detalle {
-    width: 75%;
+    width: 50px;
     background: #5d5f5bd8;
     color: #e9f0e9;
     font-size: 9px;
@@ -516,6 +543,38 @@ footer {
   .btn-cancelar:hover {
     background: #555;
   }
+
+
+
+  /* Imagenes con Slider de Seccion Inicio */
+.slider {
+  background-image: url(imagenes/logo.jpg);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  height: 250px;
+  width: 230px;
+  top: 200px;
+  left: 30%;
+  transform: translate(-20%, -50%);
+  animation: efecto linear infinite 10s;
+  border-radius: 10px;
+}
+@keyframes efecto {
+  20%{
+    background-image: url(imagenes/mesero1.jpg);
+  }
+  40%{
+    background-image: url(imagenes/mesero2.jpg);
+  }
+  60%{
+    background-image: url(imagenes/mesero3.jpg);
+  }
+  80%{
+    background-image: url(imagenes/mesero4.jpg);
+  }
+  
+}
 
 
 }
