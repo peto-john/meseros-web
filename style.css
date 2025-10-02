@@ -34,32 +34,32 @@ header nav button {
 }
 
 
- /* Imagenes con Slider de Seccion Inicio */
+ /* Imagenes con Slider de Seccion Inicio en ( PC Y TABLET ) */
 .slider {
-  background-image: url(imagenes/logo.jpg);
+  background-image: url(imagenes_inicio/0.jpg);
   background-size: cover;
   background-position: center;
   position: absolute;
   height: 50%;
   width: 30%;
-  top: 500px;
+  top: 510px;
   left: 40%;
   transform: translate(-20%, -50%);
-  animation: efecto linear infinite 10s;
+  animation: efecto linear infinite 20s;
   border-radius: 10px;
 }
 @keyframes efecto {
   20%{
-    background-image: url(imagenes/mesero1.jpg);
+    background-image: url(imagenes_inicio/1.jpg);
   }
   40%{
-    background-image: url(imagenes/mesero2.jpg);
+    background-image: url(imagenes_inicio/2.jpg);
   }
   60%{
-    background-image: url(imagenes/mesero3.jpg);
+    background-image: url(imagenes_inicio/3.jpg);
   }
   80%{
-    background-image: url(imagenes/mesero4.jpg);
+    background-image: url(imagenes_inicio/4.jpg);
   }
   
 }
@@ -548,30 +548,30 @@ footer {
 
   /* Imagenes con Slider de Seccion Inicio */
 .slider {
-  background-image: url(imagenes/logo.jpg);
+  background-image: url(imagenes_inicio/0.jpg);
   background-size: cover;
   background-position: center;
   position: relative;
   height: 250px;
-  width: 230px;
+  width: 250px;
   top: 200px;
   left: 30%;
   transform: translate(-20%, -50%);
-  animation: efecto linear infinite 10s;
+  animation: efecto linear infinite 20s;
   border-radius: 10px;
 }
 @keyframes efecto {
   20%{
-    background-image: url(imagenes/mesero1.jpg);
+    background-image: url(imagenes_inicio/1.jpg);
   }
   40%{
-    background-image: url(imagenes/mesero2.jpg);
+    background-image: url(imagenes_inicio/2.jpg);
   }
   60%{
-    background-image: url(imagenes/mesero3.jpg);
+    background-image: url(imagenes_inicio/3.jpg);
   }
   80%{
-    background-image: url(imagenes/mesero4.jpg);
+    background-image: url(imagenes_inicio/4.jpg);
   }
   
 }
